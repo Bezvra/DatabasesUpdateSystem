@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DatabasesUpdateSystem</name>
+    </assembly>
+    <members>
+        <member name="P:DatabasesUpdateSystem.Infrastructure.Repositories.Repository.QueryLimit">
+            <summary>
+                Set to non-zero to log queries using more time than the value specified (milliseconds)
+            </summary>
+        </member>
+        <member name="P:DatabasesUpdateSystem.Infrastructure.Repositories.Repository.QueryLimitIncludeStackTrace">
+            <summary>
+                When an expensive query is detected, include complete call stack.
+            </summary>
+        </member>
+    </members>
+</doc>
