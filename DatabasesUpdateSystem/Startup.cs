@@ -77,15 +77,16 @@ namespace DatabasesUpdateSystem
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info
+                c.SwaggerDoc(settings.Swagger.Version, new Info
                 {
-                    Version = "v1",
-                    Title = "DataBasesUpdateSystem API",
-                    Description = "A sample API for testing and prototyping DataBasesUpdateSystem features"
-                    //TermsOfService = "None",
-                    //Contact = new Contact { Name = "Talking Dotnet", Email = "contact@talkingdotnet.com", Url = "www.talkingdotnet.com" }
+                    Version = settings.Swagger.Version,
+                    Title = settings.Swagger.Title,
+                    Description = settings.Swagger.Description,
+                    TermsOfService = settings.Swagger.TermsOfService,
+                    Contact = new Contact { Name = settings.Swagger.ContactName, Email = settings.Swagger.ContactEmail, Url = settings.Swagger.ContactUrl },
+                    License = new License { Name = settings.Swagger.LicenseName, Url = settings.Swagger.LicenseUrl }
                 });
-                c.IncludeXmlComments("DatabasesUpdateSystem.xml");
+                c.IncludeXmlComments(settings.Swagger.XMLFilePath);
                 c.DescribeAllEnumsAsStrings();
                 c.OperationFilter<SwaggerFilter>();
             });
@@ -99,7 +100,7 @@ namespace DatabasesUpdateSystem
             {
                 Directory.CreateDirectory(folder);
             }
-            loggerFactory.AddFile(Path.Combine(folder, $"logger-{DateTime.Today:dd-MM-yyyy}.txt"));
+            loggerFactory.AddFile(Path.Combine(folder, $"logs-{DateTime.Today:dd-MM-yyyy}.txt"));
             var logger = loggerFactory.CreateLogger("FileLogger");
 
             if (env.IsDevelopment())
@@ -123,10 +124,11 @@ namespace DatabasesUpdateSystem
 
             app.UseMvc();
 
+            var settings = Configuration.GetSection("Settings").Get<Settings>();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint(Configuration["SwaggerEndpoint"], "v1 Docs");
+                c.SwaggerEndpoint(settings.Swagger.EndpointUrl, settings.Swagger.EndpointName);
             });
         }
 

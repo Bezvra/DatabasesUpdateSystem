@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DatabasesUpdateSystem.Domain.Enums;
+using DatabasesUpdateSystem.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DatabasesUpdateSystem.Controllers
@@ -34,12 +36,14 @@ namespace DatabasesUpdateSystem.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
+            throw new ServerException(Errors.DataNotFound);
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            throw new NotImplementedException();
         }
     }
 }

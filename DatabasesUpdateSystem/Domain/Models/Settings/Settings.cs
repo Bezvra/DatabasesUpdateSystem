@@ -7,7 +7,7 @@ namespace DatabasesUpdateSystem.Domain.Models.Settings
 {
     public class Settings
     {
-        public int ConfirmationExpires { get; set; }
+        public Swagger Swagger { get; set; }
         public AuthOptions AuthOptions { get; set; }
     }
 }
