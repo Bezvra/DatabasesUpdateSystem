@@ -1,6 +1,6 @@
-﻿using DatabasesUpdateSystem.Attributes;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,45 +8,41 @@ namespace DatabasesUpdateSystem.Domain.Enums
 {
     public enum Errors
     {
-        //[LocalizedDescription("UserNotAuthorized", NameResourceType = typeof(ErrorsRes))]
+        [Description("USER_NOT_AUTHORIZED")]
         UserNotAuthorized = 0,
-        //[LocalizedDescription("UserNotExist", NameResourceType = typeof(ErrorsRes))]
+        [Description("USER_NOT_EXIST")]
         UserNotExist = 1,
-        //[LocalizedDescription("UserNotRegister", NameResourceType = typeof(ErrorsRes))]
+        [Description("USER_NOT_REGISTER")]
         UserNotRegister = 2,
-        //[LocalizedDescription("NotConfirm", NameResourceType = typeof(ErrorsRes))]
+        [Description("NOT_CONFIRM")]
         NotConfirm = 3,
-        //[LocalizedDescription("UserExist", NameResourceType = typeof(ErrorsRes))]
+        [Description("USER_EXIST")]
         UserExist = 4,
-        //[LocalizedDescription("EmptyData", NameResourceType = typeof(ErrorsRes))]
+        [Description("EMPTY_DATA")]
         EmptyData = 5,
-        //[LocalizedDescription("IncorrectEmailOrPassword", NameResourceType = typeof(ErrorsRes))]
+        [Description("INCORRECT_EMAIL_OR_PASSWORD")]
         IncorrectEmailOrPassword = 6,
-        //[LocalizedDescription("PasswordNotMatch", NameResourceType = typeof(ErrorsRes))]
+        [Description("PASSWORD_NOT_MATCH")]
         PasswordNotMatch = 7,
-        //[LocalizedDescription("DataNotFound", NameResourceType = typeof(ErrorsRes))]
+        [Description("DATA_NOT_FOUND")]
         DataNotFound = 8,
-        //[LocalizedDescription("InternalServerError", NameResourceType = typeof(ErrorsRes))]
+        [Description("INTERNAL_SERVER_ERROR")]
         InternalServerError = 9,
-        //[LocalizedDescription("AccessIsDenied", NameResourceType = typeof(ErrorsRes))]
+        [Description("ACCESS_IS_DENIED")]
         AccessIsDenied = 10,
-        //[LocalizedDescription("Redirect", NameResourceType = typeof(ErrorsRes))]
+        [Description("REDIRECT")]
         Redirect = 11,
-        //[LocalizedDescription("ServerIgnor", NameResourceType = typeof(ErrorsRes))]
+        [Description("SERVER_IGNOR")]
         ServerIgnor = 12,
-        //[LocalizedDescription("UploudFilesError", NameResourceType = typeof(ErrorsRes))]
+        [Description("UPLOAD_FILES_ERROR")]
         UploudFilesError = 13,
-        //[LocalizedDescription("InvalidToken", NameResourceType = typeof(ErrorsRes))]
+        [Description("INVALID_TOKEN")]
         InvalidToken = 14,
-        //[LocalizedDescription("UserBlocked", NameResourceType = typeof(ErrorsRes))]
+        [Description("USER_BLOCKED")]
         UserBlocked = 15,
-        //[LocalizedDescription("DataExist", NameResourceType = typeof(ErrorsRes))]
+        [Description("DATA_EXIST")]
         DataExist = 16,
-        //[LocalizedDescription("SomethingWentWrong", NameResourceType = typeof(ErrorsRes))]
-        SomethingWentWrong = 17,
-        //[LocalizedDescription("SortFieldDoesntExist", NameResourceType = typeof(ErrorsRes))]
-        SortFieldDoesntExist = 18,
-        //[LocalizedDescription("UpdateDataError", NameResourceType = typeof(ErrorsRes))]
-        UpdateDataError = 19
+        [Description("SOMETHING_WENT_WRONG")]
+        SomethingWentWrong = 17
     }
 }

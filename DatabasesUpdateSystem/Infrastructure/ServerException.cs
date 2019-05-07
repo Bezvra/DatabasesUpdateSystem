@@ -8,97 +8,89 @@ using System.Threading.Tasks;
 
 namespace DatabasesUpdateSystem.Infrastructure
 {
-    public class MyException : Exception
+    public class ServerException : Exception
     {
         public ContentResult Result;
         private string errorMessage { get; set; }
         private HttpStatusCode statusCode { get; set; }
 
-        public MyException() : base() { }
+        public ServerException() : base() { }
 
-        public MyException(Errors messege)
+        public ServerException(Errors messege)
         {
             switch (messege)
             {
                 case Errors.UserNotAuthorized:
                     statusCode = HttpStatusCode.Unauthorized;
-                    errorMessage = Errors.UserNotAuthorized.GetLocalizedDescription();
+                    errorMessage = Errors.UserNotAuthorized.GetEnumDescription();
                     break;
                 case Errors.UserNotExist:
                     statusCode = HttpStatusCode.Unauthorized;
-                    errorMessage = Errors.UserNotExist.GetLocalizedDescription();
+                    errorMessage = Errors.UserNotExist.GetEnumDescription();
                     break;
                 case Errors.UserNotRegister:
                     statusCode = HttpStatusCode.Unauthorized;
-                    errorMessage = Errors.UserNotRegister.GetLocalizedDescription();
+                    errorMessage = Errors.UserNotRegister.GetEnumDescription();
                     break;
                 case Errors.NotConfirm:
                     statusCode = HttpStatusCode.Unauthorized;
-                    errorMessage = Errors.NotConfirm.GetLocalizedDescription();
+                    errorMessage = Errors.NotConfirm.GetEnumDescription();
                     break;
                 case Errors.UserExist:
                     statusCode = HttpStatusCode.BadRequest;
-                    errorMessage = Errors.UserExist.GetLocalizedDescription();
+                    errorMessage = Errors.UserExist.GetEnumDescription();
                     break;
                 case Errors.EmptyData:
                     statusCode = HttpStatusCode.NoContent;
-                    errorMessage = Errors.EmptyData.GetLocalizedDescription();
+                    errorMessage = Errors.EmptyData.GetEnumDescription();
                     break;
                 case Errors.IncorrectEmailOrPassword:
                     statusCode = HttpStatusCode.Unauthorized;
-                    errorMessage = Errors.IncorrectEmailOrPassword.GetLocalizedDescription();
+                    errorMessage = Errors.IncorrectEmailOrPassword.GetEnumDescription();
                     break;
                 case Errors.PasswordNotMatch:
                     statusCode = HttpStatusCode.BadRequest;
-                    errorMessage = Errors.PasswordNotMatch.GetLocalizedDescription();
+                    errorMessage = Errors.PasswordNotMatch.GetEnumDescription();
                     break;
                 case Errors.DataNotFound:
                     statusCode = HttpStatusCode.NotFound;
-                    errorMessage = Errors.DataNotFound.GetLocalizedDescription();
+                    errorMessage = Errors.DataNotFound.GetEnumDescription();
                     break;
                 case Errors.InternalServerError:
                     statusCode = HttpStatusCode.InternalServerError;
-                    errorMessage = Errors.InternalServerError.GetLocalizedDescription();
+                    errorMessage = Errors.InternalServerError.GetEnumDescription();
                     break;
                 case Errors.AccessIsDenied:
                     statusCode = HttpStatusCode.Forbidden;
-                    errorMessage = Errors.AccessIsDenied.GetLocalizedDescription();
+                    errorMessage = Errors.AccessIsDenied.GetEnumDescription();
                     break;
                 case Errors.Redirect:
                     statusCode = HttpStatusCode.Redirect;
-                    errorMessage = Errors.Redirect.GetLocalizedDescription();
+                    errorMessage = Errors.Redirect.GetEnumDescription();
                     break;
                 case Errors.ServerIgnor:
                     statusCode = HttpStatusCode.ServiceUnavailable;
-                    errorMessage = Errors.ServerIgnor.GetLocalizedDescription();
+                    errorMessage = Errors.ServerIgnor.GetEnumDescription();
                     break;
                 case Errors.UploudFilesError:
                     statusCode = HttpStatusCode.BadRequest;
-                    errorMessage = Errors.UploudFilesError.GetLocalizedDescription();
+                    errorMessage = Errors.UploudFilesError.GetEnumDescription();
                     break;
                 case Errors.InvalidToken:
                     statusCode = HttpStatusCode.Unauthorized;
-                    errorMessage = Errors.InvalidToken.GetLocalizedDescription();
+                    errorMessage = Errors.InvalidToken.GetEnumDescription();
                     break;
                 case Errors.UserBlocked:
                     statusCode = HttpStatusCode.Forbidden;
-                    errorMessage = Errors.UserBlocked.GetLocalizedDescription();
+                    errorMessage = Errors.UserBlocked.GetEnumDescription();
                     break;
                 case Errors.DataExist:
                     statusCode = HttpStatusCode.BadRequest;
-                    errorMessage = Errors.DataExist.GetLocalizedDescription();
-                    break;
-                case Errors.SortFieldDoesntExist:
-                    statusCode = HttpStatusCode.NotFound;
-                    errorMessage = Errors.SortFieldDoesntExist.GetLocalizedDescription();
-                    break;
-                case Errors.UpdateDataError:
-                    statusCode = HttpStatusCode.BadRequest;
-                    errorMessage = Errors.UpdateDataError.GetLocalizedDescription();
+                    errorMessage = Errors.DataExist.GetEnumDescription();
                     break;
                 default:
                     statusCode = HttpStatusCode.BadRequest;
-                    errorMessage = Errors.SomethingWentWrong.GetLocalizedDescription();
+                    errorMessage = Errors.SomethingWentWrong.GetEnumDescription();
                     break;
             }
 

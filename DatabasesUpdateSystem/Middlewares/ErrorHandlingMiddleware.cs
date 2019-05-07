@@ -24,7 +24,7 @@ namespace DatabasesUpdateSystem.Middlewares
         private static Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             context.Response.ContentType = "application/json";
-            var cryptoEx = exception is MyException ? (MyException)exception : new MyException(Errors.InternalServerError);
+            var cryptoEx = exception is ServerException ? (ServerException)exception : new ServerException(Errors.InternalServerError);
             context.Response.StatusCode = (int)cryptoEx.Result.StatusCode;
             return context.Response.WriteAsync(JsonConvert.SerializeObject(new { error = cryptoEx.Result.Content }));
         }
@@ -37,7 +37,7 @@ namespace DatabasesUpdateSystem.Middlewares
             }
             catch (Exception ex)
             {
-                var cryptoEx = ex as MyException;
+                var cryptoEx = ex as ServerException;
                 if (cryptoEx == null)
                 {
                     var message = ex.Message;
