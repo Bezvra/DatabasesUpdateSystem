@@ -24,6 +24,9 @@ namespace DatabasesUpdateSystem
 {
     public class Startup
     {
+        private string settingsName = "Settings";
+        private string corsPolicyName = "CorsPolicy";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -36,7 +39,7 @@ namespace DatabasesUpdateSystem
         {
             services.AddCors(options =>
             {
-                options.AddPolicy("CorsPolicy",
+                options.AddPolicy(corsPolicyName,
                     builder => builder.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader()
@@ -52,7 +55,7 @@ namespace DatabasesUpdateSystem
                 config.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
 
-            var settings = Configuration.GetSection("Settings").Get<Settings>();
+            var settings = Configuration.GetSection(settingsName).Get<Settings>();
             services.AddAuthentication(o =>
             {
                 o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -113,7 +116,7 @@ namespace DatabasesUpdateSystem
                 app.UseHttpsRedirection();
             }
 
-            app.UseCors("CorsPolicy");
+            app.UseCors(corsPolicyName);
 
             app.UseMiddleware<ErrorHandlingMiddleware>();
 
@@ -124,7 +127,7 @@ namespace DatabasesUpdateSystem
 
             app.UseMvc();
 
-            var settings = Configuration.GetSection("Settings").Get<Settings>();
+            var settings = Configuration.GetSection(settingsName).Get<Settings>();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
