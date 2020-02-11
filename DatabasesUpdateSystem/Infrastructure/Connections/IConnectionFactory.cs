@@ -1,10 +1,10 @@
-﻿using System.Data;
+﻿using DatabasesUpdateSystem.Domain.Enums;
 
 namespace DatabasesUpdateSystem.Infrastructure.Connections
 {
     public interface IConnectionFactory
     {
-        IDbConnection GetConnection { get; }
+        Databases DatabaseType { get; }
 
         string ConnectionString { get; }
     }

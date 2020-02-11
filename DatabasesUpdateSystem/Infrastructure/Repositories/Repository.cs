@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using DatabasesUpdateSystem.Domain.Enums;
+using DatabasesUpdateSystem.Infrastructure.Connections;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -17,19 +19,32 @@ namespace DatabasesUpdateSystem.Infrastructure.Repositories
             _logger = logger;
         }
 
-        protected string DBConnectionString { get; set; }
+        protected IConnectionFactory DBContext { get; set; }
+        protected IConnectionFactory StorageContext { get; set; }
 
         public IDbConnection OpenConnection()
         {
-            var connection = new SqlConnection(DBConnectionString);
-            connection.Open();
+            IDbConnection connection = null;
+            switch (DBContext.DatabaseType)
+            {
+                case Databases.MSSQL:
+                    connection = new SqlConnection(DBContext.ConnectionString);
+                    break;
+                default:
+                    break;
+            }
+
+            if (connection != null || connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
 
             return connection;
         }
 
         public void InTransaction(Action<IDbConnection, IDbTransaction> executor)
         {
-            using (var connection = new SqlConnection(DBConnectionString))
+            using (var connection = OpenConnection())
             {
                 connection.Open();
                 var transaction = connection.BeginTransaction();

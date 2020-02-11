@@ -15,13 +15,13 @@ namespace DatabasesUpdateSystem.Extensions
         {
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            services.AddTransient<DBConnectionFactory>();
-            services.AddTransient<Func<DataBases, IConnectionFactory>>(serviceProvider => key =>
+            services.AddTransient<MSSQLConnectionFactory>();
+            services.AddTransient<Func<Databases, IConnectionFactory>>(serviceProvider => key =>
             {
                 switch (key)
                 {
-                    case DataBases.SQL:
-                        return serviceProvider.GetService<DBConnectionFactory>();
+                    case Databases.MSSQL:
+                        return serviceProvider.GetService<MSSQLConnectionFactory>();
                     default:
                         throw new KeyNotFoundException();
                 }

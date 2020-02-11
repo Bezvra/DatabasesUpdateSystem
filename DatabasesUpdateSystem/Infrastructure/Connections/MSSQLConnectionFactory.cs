@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using DatabasesUpdateSystem.Domain.Enums;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -9,17 +10,20 @@ using System.Threading.Tasks;
 
 namespace DatabasesUpdateSystem.Infrastructure.Connections
 {
-    public class DBConnectionFactory : IConnectionFactory
+    public class MSSQLConnectionFactory : IConnectionFactory
     {
         private readonly IConfiguration _configuration;
-        private readonly ILogger<DBConnectionFactory> _logger;
+        private readonly ILogger<MSSQLConnectionFactory> _logger;
 
         private bool disposedValue; // To detect redundant calls
 
-        public DBConnectionFactory(IConfiguration configuration, ILogger<DBConnectionFactory> logger)
+        public Databases DatabaseType { get; private set; }
+
+        public MSSQLConnectionFactory(IConfiguration configuration, ILogger<MSSQLConnectionFactory> logger)
         {
             _configuration = configuration;
             _logger = logger;
+            DatabaseType = Databases.MSSQL;
         }
 
         public IDbConnection GetConnection { get; }

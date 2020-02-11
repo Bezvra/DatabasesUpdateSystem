@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace DatabasesUpdateSystem.Domain.Enums
 {
-    public enum DataBases
+    public enum Databases
     {
-        SQL = 0
+        MSSQL = 0
     }
 }
